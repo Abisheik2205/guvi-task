@@ -33,7 +33,7 @@ A full-stack web application implementing a complete user authentication and pro
 - **Redis** — server-side session storage, decoupled from PHP's native session engine
 
 **Hosting**
-- Deployed on [Heroku / AWS — link below]
+- Deployed on [ AWS — http://16.16.66.84/guvi_task/ ]
 
 ## Project Demo
 
@@ -77,21 +77,21 @@ A full-stack web application implementing a complete user authentication and pro
 
    Create a `.env` file in the project root:
    ```env
-   DB_HOST=127.0.0.1
-   DB_NAME=guvi_task
-   DB_USER=root
-   DB_PASS=
+   DB_HOST=your_mysql_host
+   DB_NAME=your_database_name
+   DB_USER=your_mysql_user
+   DB_PASS=your_mysql_password
 
    MONGO_URI=your_mongodb_atlas_connection_string
 
-   REDIS_HOST=127.0.0.1
-   REDIS_PORT=6379
+   REDIS_HOST=your_redis_host
+   REDIS_PORT=your_redis_port
    ```
 
 4. **Set up the MySQL database**
    ```sql
-   CREATE DATABASE guvi_task;
-   USE guvi_task;
+   CREATE DATABASE your_database_name;
+   USE your_database_name;
 
    CREATE TABLE users (
      id INT AUTO_INCREMENT PRIMARY KEY,
@@ -113,7 +113,8 @@ A full-stack web application implementing a complete user authentication and pro
 
 7. **Open the app**
 
-   Navigate to `http://localhost:8000/register.html` to create an account, then log in and manage your profile.
+   For local development, navigate to `http://localhost:8000/register.html` to create an account, then log in and manage your profile.
+
 
 ## Project Structure
 
