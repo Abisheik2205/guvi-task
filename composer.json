@@ -1,0 +1,11 @@
+{
+    "require": {
+        "mongodb/mongodb": "1.17",
+        "predis/predis": "^3.5",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "config": {
+        "disable-tls": true,
+        "secure-http": false
+    }
+}
