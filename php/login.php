@@ -1,5 +1,7 @@
 <?php
 require '../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->safeload();
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -7,10 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     try {
-        $dbHost = getenv('DB_HOST') ?: '127.0.0.1';
-        $dbName = getenv('DB_NAME') ?: 'guvi_task';
-        $dbUser = getenv('DB_USER') ?: 'root';
-        $dbPass = getenv('DB_PASS') ?: '';
+        $dbHost = $_ENV['DB_HOST'] ?? '';
+        $dbName = $_ENV['DB_NAME'] ?? ''; 
+        $dbUser = $_ENV['DB_USER'] ?? '';
+        $dbPass = $_ENV['DB_PASS'] ?? '';
         $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -33,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Secure Redis Session Generation
         $redis = new Predis\Client([
-            'scheme' => 'tcp',
-            'host'   => '127.0.0.1',
-            'port'   => 6379,
+          'scheme' => 'tcp',
+          'host'   => $_ENV['REDIS_HOST'] ?? '',
+          'port'   => $_ENV['REDIS_PORT'] ?? '',
         ]);
         
         $sessionToken = bin2hex(random_bytes(32));

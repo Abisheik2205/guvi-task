@@ -1,6 +1,8 @@
 <?php
 // Include the Composer autoloader
 require '../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->safeload();
 
 // Ensure the response is always treated as JSON by the frontend AJAX
 header('Content-Type: application/json');
@@ -22,10 +24,10 @@ try {
     // Database connection using Environment Variables for Heroku/AWS hosting
     // It falls back to local credentials for your local XAMPP development
     // Ensure these exactly match your local XAMPP setup
-    $dbHost = getenv('DB_HOST') ?: '127.0.0.1'; // Use 127.0.0.1 instead of localhost for XAMPP stability
-    $dbName = getenv('DB_NAME') ?: 'guvi_task'; 
-    $dbUser = getenv('DB_USER') ?: 'root';      // XAMPP default is 'root'
-    $dbPass = getenv('DB_PASS') ?: '';          // XAMPP default password is blank
+    $dbHost = $_ENV['DB_HOST'] ?? '';
+    $dbName = $_ENV['DB_NAME'] ?? ''; 
+    $dbUser = $_ENV['DB_USER'] ?? '';
+    $dbPass = $_ENV['DB_PASS'] ?? '';          // XAMPP default password is blank
 
     $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPass);
     
